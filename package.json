@@ -1,0 +1,31 @@
+{
+  "name": "ebay-node",
+  "version": "1.0.0",
+  "description": "ebay cliente in nodejs",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afelipelc/ebay-node-client.git"
+  },
+  "keywords": [
+    "ebay",
+    "nodejs",
+    "client"
+  ],
+  "author": "@afelipelc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/afelipelc/ebay-node-client/issues"
+  },
+  "homepage": "https://github.com/afelipelc/ebay-node-client#readme",
+  "dependencies": {
+    "ebay-node-api": "^2.7.2",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
