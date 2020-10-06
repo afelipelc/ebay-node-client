@@ -23,7 +23,7 @@
   "homepage": "https://github.com/afelipelc/ebay-node-client#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "ebay-node-api": "^2.7.2",
+    "ebay-node-client": "0.0.10",
     "express": "^4.17.1"
   },
   "devDependencies": {

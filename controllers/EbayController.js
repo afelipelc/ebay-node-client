@@ -1,23 +1,24 @@
-const Ebay = require('ebay-node-api');
-
-// for info about ebay-node-api config, look at https://www.npmjs.com/package/ebay-node-api 
+const eBay = require('ebay-node-client')('CLIENT-ID', 'CLIENT-SECRET');
 
 // get your cliendId and clientSecret at https://developer.ebay.com/my/keys
-const ebay = new Ebay({
-  clientID: '--Client Id----',
-  clientSecret: '-- Client Secret --',
-  env: 'SANDBOX',
-  body: {
-      grant_type: 'client_credentials',
-  //you may need to define the oauth scope
-  scope: 'https://api.ebay.com/oauth/api_scope'
-  }
-});
 
 // use of ebay api
 exports.find = async (req, res) => {
   try {
-    ebay.findItemsByKeywords(req.params.query).then((data) => {
+    var token = await eBay.application.getOAuthToken({
+        grant_type: 'client_credentials',
+        scope: 'https://api.ebay.com/oauth/api_scope'
+    });
+    eBay.setToken(token.access_token);
+  } catch (error) {
+      console.log('error ', error);
+      return res.json({
+        message: 'Error al conectar a eBay: ' + error.error_description,
+      });
+  }
+
+  try {
+    eBay.browse.search({ q: req.params.query }).then((data) => {
       console.log(data);
       res.json(data);
     }, (error) => {
@@ -34,9 +35,25 @@ exports.find = async (req, res) => {
   }
 };
 
+/**
+ * view products by category_id
+ */
 exports.getItemsByCategory = async (req, res) => {
   try {
-   ebay.findItemsByCategory(req.params.category).then((data) => {
+    var token = await eBay.application.getOAuthToken({
+        grant_type: 'client_credentials',
+        scope: 'https://api.ebay.com/oauth/api_scope'
+    });
+    eBay.setToken(token.access_token);
+  } catch (error) {
+      console.log('error ', error);
+      return res.json({
+        message: 'Error al conectar a eBay: ' + error.error_description,
+      });
+  }
+
+  try {
+    eBay.catalog.search({ category_ids: req.params.category }).then((data) => {
       console.log(data);
       res.json(data);
     }, (error) => {
