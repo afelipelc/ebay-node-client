@@ -53,7 +53,7 @@ exports.getItemsByCategory = async (req, res) => {
   }
 
   try {
-    eBay.catalog.search({ category_ids: req.params.category }).then((data) => {
+    eBay.browse.search({ category_ids: req.params.category }).then((data) => {
       console.log(data);
       res.json(data);
     }, (error) => {
